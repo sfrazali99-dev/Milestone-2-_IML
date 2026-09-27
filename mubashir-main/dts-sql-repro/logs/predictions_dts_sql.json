@@ -1,0 +1,114 @@
+[
+  {
+    "example_id": 0,
+    "db_id": "employee_hire_evaluation",
+    "question": "Find the name of the shops that do not hire any employee.",
+    "gold_sql": "SELECT name FROM shop WHERE shop_id NOT IN (SELECT shop_id FROM hiring)",
+    "predicted_sql": "SELECT Employee_ID, Name FROM employee;",
+    "linked_schema": {
+      "employee": [
+        "Employee_ID",
+        "Name"
+      ],
+      "evaluation": [
+        "Employee_ID"
+      ],
+      "hiring": [
+        "Employee_ID"
+      ]
+    },
+    "latency_seconds": 0.000436700000136625,
+    "system": "dts_sql"
+  },
+  {
+    "example_id": 1,
+    "db_id": "concert_singer",
+    "question": "Show the stadium names without any concert.",
+    "gold_sql": "SELECT name FROM stadium WHERE stadium_id NOT IN (SELECT stadium_id FROM concert)",
+    "predicted_sql": "SELECT Name FROM stadium;",
+    "linked_schema": {
+      "stadium": [
+        "Stadium_ID",
+        "Name"
+      ],
+      "singer": [
+        "Name"
+      ],
+      "concert": [
+        "concert_Name",
+        "concert_ID",
+        "Stadium_ID"
+      ],
+      "singer_in_concert": [
+        "concert_ID"
+      ]
+    },
+    "latency_seconds": 0.00023269999996955448,
+    "system": "dts_sql"
+  },
+  {
+    "example_id": 2,
+    "db_id": "concert_singer",
+    "question": "Show the name and the release year of the song by the youngest singer.",
+    "gold_sql": "SELECT song_name ,  song_release_year FROM singer ORDER BY age LIMIT 1",
+    "predicted_sql": "SELECT Name FROM stadium;",
+    "linked_schema": {
+      "stadium": [
+        "Name"
+      ],
+      "singer": [
+        "Song_release_year",
+        "Song_Name",
+        "Singer_ID",
+        "Name"
+      ],
+      "concert": [
+        "Year",
+        "concert_Name"
+      ],
+      "singer_in_concert": [
+        "Singer_ID"
+      ]
+    },
+    "latency_seconds": 0.00015460000008715724,
+    "system": "dts_sql"
+  },
+  {
+    "example_id": 3,
+    "db_id": "car_1",
+    "question": "How much does the car accelerate that makes amc hornet sportabout (sw)?",
+    "gold_sql": "SELECT T1.Accelerate FROM CARS_DATA AS T1 JOIN CAR_NAMES AS T2 ON T1.Id  =  T2.MakeId WHERE T2.Make  =  'amc hornet sportabout (sw)';",
+    "predicted_sql": "SELECT Country FROM car_makers;",
+    "linked_schema": {
+      "car_makers": [
+        "Id",
+        "Country"
+      ],
+      "car_names": [
+        "Make"
+      ],
+      "cars_data": [
+        "Accelerate"
+      ]
+    },
+    "latency_seconds": 0.00021560000004683388,
+    "system": "dts_sql"
+  },
+  {
+    "example_id": 4,
+    "db_id": "car_1",
+    "question": "What are the different models for the cards produced after 1980?",
+    "gold_sql": "SELECT DISTINCT T1.model FROM MODEL_LIST AS T1 JOIN CAR_NAMES AS T2 ON T1.model  =  T2.model JOIN CARS_DATA AS T3 ON T2.MakeId  =  T3.id WHERE T3.year  >  1980;",
+    "predicted_sql": "SELECT Model FROM model_list;",
+    "linked_schema": {
+      "model_list": [
+        "Model"
+      ],
+      "car_names": [
+        "Model"
+      ]
+    },
+    "latency_seconds": 0.00018890000001192675,
+    "system": "dts_sql"
+  }
+]

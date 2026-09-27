@@ -1,0 +1,35 @@
+# DTS-SQL Reproduction Configuration
+
+dataset:
+  name: "spider"
+  # Official Spider dataset download via gdown (Google Drive) or manual.
+  # Official source: https://drive.google.com/uc?export=download&id=1_O51_Pdl8yvwQG87y1H6n8r5z4Vd0mho
+  # See data/download_spider.py for instructions.
+  data_dir: "data/spider"
+  subset_size: 20  # small evaluation set for fast iteration (can be increased to full dev set)
+  random_seed: 42
+
+models:
+  # *** MODEL SUBSTITUTION NOTICE ***
+  # The DTS-SQL paper uses fine-tuned 7B-parameter checkpoints released by the authors:
+  #   Stage 1 (Schema Linking): pourreza/DTS-SQL-SL-7B (DeepSeek-Coder-7B fine-tune)
+  #   Stage 2 (SQL Generation): pourreza/DTS-SQL-7B (DeepSeek-Coder-7B fine-tune)
+  #   Baseline: Same 7B model prompted end-to-end.
+  # Those checkpoints could not be loaded on this hardware (no GPU, insufficient RAM for 7B in fp32).
+  # We substitute Qwen/Qwen2.5-Coder-1.5B-Instruct, an instruction-tuned 1.5B coding model,
+  # as the smallest publicly available coding LLM that can run inference on CPU.
+  # This substitution is EXPLICITLY flagged and is NOT the paper's official checkpoint.
+  # Results produced with this substitute are not directly comparable to the paper's numbers.
+  schema_linking_model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"  # SUBSTITUTE — see notice above
+  sql_generation_model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"  # SUBSTITUTE — see notice above
+  baseline_direct_model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"  # SUBSTITUTE — see notice above
+
+  # Inference settings
+  max_new_tokens: 256
+  temperature: 0.0
+  device: "auto"  # "cuda" or "cpu" or "auto"
+
+evaluation:
+  log_dir: "logs"
+  output_summary: "logs/metrics_summary.json"
+  output_details: "logs/eval_details.jsonl"

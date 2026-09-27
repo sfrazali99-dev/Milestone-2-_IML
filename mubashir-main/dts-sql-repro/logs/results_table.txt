@@ -1,0 +1,4 @@
+| System              | Execution Accuracy   | Avg. time/query   |   # examples |
+|---------------------|----------------------|-------------------|--------------|
+| Baseline (direct)   | 0.00% (0/20)         | 0.0001s           |           20 |
+| DTS-SQL (two-stage) | 5.00% (1/20)         | 0.0002s           |           20 |

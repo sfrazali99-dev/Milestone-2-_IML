@@ -1,0 +1,10 @@
+venv/
+__pycache__/
+*.pyc
+.env
+
+*.sqlite
+*.zip
+dts-sql-repro/data/spider/
+dts-sql-repro/data/spider_data/
+dts-sql-repro/data/spider_official/

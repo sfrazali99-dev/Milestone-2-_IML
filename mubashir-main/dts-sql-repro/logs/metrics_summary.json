@@ -1,0 +1,18 @@
+{
+  "num_samples": 20,
+  "seed": 42,
+  "model_name": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+  "baseline": {
+    "accuracy_pct": 0.0,
+    "avg_latency": 0.0001,
+    "correct": 0,
+    "total": 20
+  },
+  "dts_sql": {
+    "accuracy_pct": 5.0,
+    "avg_latency": 0.0002,
+    "correct": 1,
+    "total": 20
+  },
+  "accuracy_gain_pct": 5.0
+}
